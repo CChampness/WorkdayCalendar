@@ -23,10 +23,8 @@ function minuteCounter() {
   var timeInterval = setInterval(function() {
         
     currentTime = moment().format("MMMM Do, YYYY h:mm A");
-    console.log("currentTime:"+currentTime);
     // Set the time display in the header
     dateTime.text(currentTime);
-    console.log("dateTime:" + dateTime.text());
     if (lastHour != currentHour) {
       // The hour has rolled over, so handle the timeblock updates
       updateTimeBlocks();
@@ -37,16 +35,25 @@ function minuteCounter() {
   }, 60000);  // 1 minute
   }
 
-  function setupRows(){
-    var containerEl = $('#container');
-    console.log(containerEl.text());
+  function setupRows(numHours){
+    var containerEl = $('.container');
     for (var i=0; i<numHours; i++){
-      var divEl = $("<div>").addClass("row time-block").text("AM/PM");
-      console.log(divEl.text());
-      containerEl.append(divEl);
+      var rowEl = containerEl.append("<div>ROW</div>");
+      console.log("row:" + i + " " +rowEl);
+      rowEl.addClass(["row", "time-block"]);
+      var hourEl = rowEl.append("<div>hours</div>");
+      hourEl.addClass(["col", "col-2", "hour"]);
+      var eventEl = rowEl.append("<div>event</div>");
+      hourEl.addClass(["col", "col-7", "description", "present"]);
+      var saveBtnEl = rowEl.append("<div>save</div>");
+      saveBtnEl.addClass(["col", "col-1", "saveBtn"]);
+
+      // rowEl.text("AM/PM");
+      // console.log(rowEl.text());
+      // containerEl.append(rowEl);
       console.log("setupRows:"+i);
     }
   }
 
   minuteCounter();
-  setupRows();
+  setupRows(numHours);
