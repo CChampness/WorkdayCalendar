@@ -5,12 +5,18 @@ body {
 }
 
 textarea {
+
+  position: relative;
+  top: 0;
+  left: 0;
+  margin-top: -10px;
+  margin-left: -75px;
   background: transparent;
   border: none;
   resize: none;
   color: #000000;
-  border-left: 1px solid black;
-  padding: 10px;
+  /* border-left: 1px solid black; */
+  padding: 0px;
 }
 
 .jumbotron {
@@ -22,7 +28,17 @@ textarea {
 }
 
 .description {
+  height: 79px;
   white-space: pre-wrap;
+  padding: 0;
+}
+
+input {
+  border: none;
+  background-color: #d3d3d3;
+  height: 95%;
+  width: 100%;
+  margin: -30px 0 0 0;
 }
 
 .time-block {

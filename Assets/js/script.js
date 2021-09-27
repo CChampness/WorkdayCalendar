@@ -1,33 +1,43 @@
-const managedHours = [7,8,9,10,11,12,1,2,3,4,5,6];
+var managedHours = [[7,""],[8,""],[9,""],[10,""],[11,""],[12,""],[1,""],[2,""],[3,""],[4,""],[5,""],[6,""]];
+console.log(managedHours);
 const numHours = managedHours.length;
 var dateTime = $('#currentDay');
-// console.log("dateTime:" + dateTime(text));
 
 function updateTimeBlocks(currentHour) {
   console.log("updateTimeBlocks " + currentHour);
-  for(var pos=0; managedHours[pos] != currentHour; pos++);
+  // Get the position of the current hour in the array
+  for(var pos=0; managedHours[pos][0] != currentHour; pos++);
   for(var i=0; i<numHours; i++) {
-    var hour = managedHours[i];
-    console.log("hour:"+hour);
+    var hour = managedHours[i][0];
     if (i < pos) {
       // Change color for past hours to gray
-      console.log("less than hour:"+hour);
       $("#" + hour).removeClass("present");
       $("#" + hour).removeClass("future");
       $("#" + hour).addClass("past");
     } else if (i == pos) {
       // Change color for currentHour to red
-      console.log("equal hour:"+hour);
       $("#" + hour).removeClass("past");
       $("#" + hour).removeClass("future");
       $("#" + hour).addClass("present");
     } else {
       // Change color for future hours to green
-      console.log("more than hour:"+hour);
       $("#" + hour).removeClass("past");
       $("#" + hour).removeClass("present");
       $("#" + hour).addClass("future");
     }
+  }
+}
+
+function getStoredEvents() {
+  var trialList = JSON.parse(localStorage.getItem("eventList"));
+    if (trialList) {
+    // If trialList is NOT null, we want to collect everything in it.
+    managedHours = trialList;
+  }
+  console.log(managedHours);
+  // Display all of the saved events in the schedule
+  for(var i=0; i<numHours; i++) {
+    $("#input"+managedHours[i][0]).val(managedHours[i][1]);
   }
 }
 
@@ -42,7 +52,7 @@ function minuteCounter() {
   var lastHour = currentHour;
   console.log("lastHour:" + lastHour+", currentHour:" +currentHour);
  
-  // Use the `setInterval()` to go off every minute
+  // Use the setInterval() to go off every minute
   var timeInterval = setInterval(function() {
         
     currentTime = moment().format("MMMM Do, YYYY h:mm A");
@@ -91,11 +101,17 @@ function minuteCounter() {
   }
 
   function saveEvent(hour) {
-    console.log("saveEvent " + hour);
+    console.log("saveEvent " + $("#" + hour).val());
+    var text = $("#input"+hour).val();
+    console.log("text: " + text);
+    // Find index of the hour
+    for(var pos=0; managedHours[pos][0] != hour; pos++);
+    managedHours[pos][1] = text;
+    localStorage.setItem("eventList", JSON.stringify(managedHours));
   }
 
   var currentHour = moment().format("hh");
   updateTimeBlocks(currentHour);
-
+  getStoredEvents();
   minuteCounter();
-  // setupRows(numHours);
+  
