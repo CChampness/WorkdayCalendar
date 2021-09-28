@@ -1,4 +1,4 @@
-var managedHours = [[7,""],[8,""],[9,""],[10,""],[11,""],[12,""],[1,""],[2,""],[3,""],[4,""],[5,""],[6,""]];
+var managedHours = [[7,"","AM"],[8,"","AM"],[9,"","AM"],[10,"","AM"],[11,"","AM"],[12,"","PM"],[1,"","PM"],[2,"","PM"],[3,"","PM"],[4,"","PM"],[5,"","PM"],[6,""]];
 // console.log(managedHours);
 const numHours = managedHours.length;
 var dateTime = $('#currentDay');
@@ -89,9 +89,6 @@ function minuteCounter() {
   function setupRows(numHours){
     var containerEl = $('.container');
     for (var i=0; i<numHours; i++){
-      // Get to the right index for this hour
-      // console.log("managedHours: " +managedHours);
-      // for(var ndx=0; managedHours[ndx][0] != i; ndx++);
       var rowEl = $(document.createElement("div"));
       rowEl.addClass("row time-block");
       containerEl.append(rowEl);
@@ -111,23 +108,29 @@ function minuteCounter() {
       eventEl.append(textEl);
       rowEl.append(eventEl);
 
-      var saveEl = $(document.createElement("div"));
+      var saveEl = $("<div>"); //$(document.createElement("div"));
       saveEl.attr("onclick", "saveEvent("+managedHours[i][0]+")");
       saveEl.addClass("col col-1 savebtn");
 
-      var svgEl = $(document.createElement("svg"));
-      svgEl.attr("xmlns","http://www.w3.org/2000/svg");
-      svgEl.attr("width","16");
-      svgEl.attr("height","16");
-      svgEl.attr("fill","currentColor");
-      svgEl.addClass("bi bi-save");
-      svgEl.attr("viewBox","0 0 16 16");
+      // var svgEl = $("<svg>");
+      // svgEl.attr("xmlns","http://www.w3.org/2000/svg");
+      // svgEl.attr("width","16");
+      // svgEl.attr("height","16");
+      // svgEl.attr("fill","currentColor");
+      // svgEl.addClass("bi bi-save");
+      // svgEl.attr("viewBox","0 0 16 16");
       // Need path
-      saveEl.append(svgEl);
+      var pathEl = $("<path>");
+      // pathEl.attr("d","M2 1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H9.5a1 1 0 0 0-1 1v7.293l2.646-2.647a.5.5 0 0 1 .708.708l-3.5 3.5a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L7.5 9.293V2a2 2 0 0 1 2-2H14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h2.5a.5.5 0 0 1 0 1H2z");
+      // var pathEl = $("<path d='M2 1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H9.5a1 1 0 0 0-1 1v7.293l2.646-2.647a.5.5 0 0 1 .708.708l-3.5 3.5a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L7.5 9.293V2a2 2 0 0 1 2-2H14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h2.5a.5.5 0 0 1 0 1H2z/>'");
+      // svgEl.append(pathEl);
+      // saveEl.append(svgEl);
+      var iconEl = $("<i class='fas fa-save'></i>");              
+      saveEl.append(iconEl);
       rowEl.append(saveEl);
 
-      console.log(rowEl);
-      console.log("setupRows:"+i);
+    //   console.log(rowEl);
+    //   console.log("setupRows:"+i);
     }
   }
 
