@@ -27,23 +27,24 @@
       <h1 class="display-3">Work Day Scheduler</h1>
       <p class="lead">A simple calendar app for scheduling your work day</p>
       <p id="currentDay" class="lead">timeclock goes here</p>
+      <button type="button" onclick="clearSched()">Clear schedule</button>
     </header>
     <div class="container">
 
-      <div class="row time-block">
+      <!-- <div class="row time-block">
         <div class="col col-1 hour">
           7AM
         </div>
         <div id="7" class="col col-8 description past">
           <textarea id="input7" rows=4 cols=50></textarea>
         </div>
-        <div button onclick="saveEvent(7)" class="col col-1 savebtn">
+        <div onclick="saveEvent(7)" class="col col-1 savebtn">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-save" viewBox="0 0 16 16">
           <path d="M2 1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H9.5a1 1 0 0 0-1 1v7.293l2.646-2.647a.5.5 0 0 1 .708.708l-3.5 3.5a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L7.5 9.293V2a2 2 0 0 1 2-2H14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h2.5a.5.5 0 0 1 0 1H2z"/>
           </svg>
         </div>
-      </div>
-
+      </div> -->
+<!-- 
       <div class="row time-block">
         <div class="col col-1 hour">
           8AM
@@ -51,7 +52,7 @@
         <div id="8" class="col col-8 description present">
           <textarea id="input8" rows=4 cols=50></textarea>
         </div>
-        <div button onclick="saveEvent(8)" class="col col-1 savebtn">
+        <div onclick="saveEvent(8)" class="col col-1 savebtn">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-save" viewBox="0 0 16 16">
           <path d="M2 1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H9.5a1 1 0 0 0-1 1v7.293l2.646-2.647a.5.5 0 0 1 .708.708l-3.5 3.5a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L7.5 9.293V2a2 2 0 0 1 2-2H14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h2.5a.5.5 0 0 1 0 1H2z"/>
           </svg>
@@ -64,7 +65,6 @@
       </div>
       <div id="9" class="col col-8 description future">
         <textarea id="input9" rows=4 cols=50></textarea>
-        <!-- <input id="input9" type="text" value=""/> -->
       </div>
       <div onclick="saveEvent(9)" class="col col-1 savebtn">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-save" viewBox="0 0 16 16">
@@ -190,14 +190,14 @@
     6PM
   </div>
   <div id="6" class="col col-8 description future">
-    <textarea id="input9" rows=4 cols=50></textarea>
+    <textarea id="input6" rows=4 cols=50></textarea>
   </div>
   <div onclick="saveEvent(6)" class="col col-1 savebtn">
     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-save" viewBox="0 0 16 16">
     <path d="M2 1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H9.5a1 1 0 0 0-1 1v7.293l2.646-2.647a.5.5 0 0 1 .708.708l-3.5 3.5a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L7.5 9.293V2a2 2 0 0 1 2-2H14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h2.5a.5.5 0 0 1 0 1H2z"/>
     </svg>
   </div>
-</div>
+</div> -->
 </div>
 <hr>
 <footer>
