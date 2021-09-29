@@ -1,4 +1,5 @@
-var managedHours = [[7,"","AM"],[8,"","AM"],[9,"","AM"],[10,"","AM"],[11,"","AM"],[12,"","PM"],[1,"","PM"],[2,"","PM"],[3,"","PM"],[4,"","PM"],[5,"","PM"],[6,""]];
+var managedHours = [[7,"AM",""],[8,"AM",""],[9,"AM",""],[10,"AM",""],[11,"AM",""],
+                    [12,"PM",""],[1,"PM",""],[2,"PM",""],[3,"PM",""],[4,"PM",""],[5,"PM",""],[6,"PM",""]];
 // console.log(managedHours);
 const numHours = managedHours.length;
 var dateTime = $('#currentDay');
@@ -35,10 +36,10 @@ function getStoredEvents() {
     // If trialList is NOT null, we want to collect everything in it.
     managedHours = trialList;
   }
-  // console.log(managedHours);
-  // Display all of the saved events in the schedule
+   // Display all of the saved events in the schedule
   for(var i=0; i<numHours; i++) {
-    $("#input"+managedHours[i][0]).val(managedHours[i][1]);
+    $("#"+managedHours[i][0]).val(managedHours[i][2]);
+ // console.log(managedHours[i]);
   }
 }
 
@@ -46,19 +47,15 @@ function minuteCounter() {
   var currentTime;
   var lastHour = 
   currentTime = moment().format("MMMM Do, YYYY h:mm A");
-  // console.log(currentTime);
-  dateTime.text(currentTime);
+   dateTime.text(currentTime);
 
   currentHour = moment().format("hh");
   var lastHour = currentHour;
-  // console.log("lastHour:" + lastHour+", currentHour:" +currentHour);
  
-  // Use the setInterval() to go off every minute
+  // Use the setInterval() function to go off every minute
   var timeInterval = setInterval(function() {
-        
     currentTime = moment().format("MMMM Do, YYYY h:mm A");
-    // console.log(currentTime);
-
+ 
     // Set the time display in the header
     dateTime.text(currentTime);
     if (lastHour != currentHour) {
@@ -87,50 +84,42 @@ function minuteCounter() {
 // </div>
 
   function setupRows(numHours){
-    var containerEl = $('.container');
+    var containerEl = $(".container");
     for (var i=0; i<numHours; i++){
-      var rowEl = $(document.createElement("div"));
+      var rowEl = $("<div>");
       rowEl.addClass("row time-block");
       containerEl.append(rowEl);
 
-      var hourEl = $(document.createElement("div"));
+      var hourEl = $("<div>");
       hourEl.addClass("col col-1 hour");
-      hourEl.text(managedHours[i][0]);
+      hourEl.text(managedHours[i][0]+managedHours[i][1]);
       rowEl.append(hourEl);
 
-      var eventEl = $(document.createElement("div"));
+      // var eventEl = $("<div>");
+      // eventEl.attr("id", managedHours[i][0]);
+      // eventEl.addClass("col col-8 description future");
+      // var textEl = $("<textarea>");
+      // textEl.attr("id","input"+managedHours[i][0]);
+      // textEl.attr("rows","4");
+      // textEl.attr("cols","50");
+      // eventEl.append(textEl);
+      // rowEl.append(eventEl);
+
+      var eventEl = $("<textarea type='input'>");
       eventEl.attr("id", managedHours[i][0]);
       eventEl.addClass("col col-8 description future");
-      var textEl = $(document.createElement("textarea"));
-      textEl.attr("id","input"+managedHours[i][0]);
-      textEl.attr("rows","4");
-      textEl.attr("cols","50");
-      eventEl.append(textEl);
+      eventEl.attr("id", managedHours[i][0]);
+      eventEl.attr("rows","4");
+      eventEl.attr("cols","50");
       rowEl.append(eventEl);
 
-      var saveEl = $("<div>"); //$(document.createElement("div"));
+      var saveEl = $("<div>");
       saveEl.attr("onclick", "saveEvent("+managedHours[i][0]+")");
       saveEl.addClass("col col-1 savebtn");
 
-      // var svgEl = $("<svg>");
-      // svgEl.attr("xmlns","http://www.w3.org/2000/svg");
-      // svgEl.attr("width","16");
-      // svgEl.attr("height","16");
-      // svgEl.attr("fill","currentColor");
-      // svgEl.addClass("bi bi-save");
-      // svgEl.attr("viewBox","0 0 16 16");
-      // Need path
-      var pathEl = $("<path>");
-      // pathEl.attr("d","M2 1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H9.5a1 1 0 0 0-1 1v7.293l2.646-2.647a.5.5 0 0 1 .708.708l-3.5 3.5a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L7.5 9.293V2a2 2 0 0 1 2-2H14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h2.5a.5.5 0 0 1 0 1H2z");
-      // var pathEl = $("<path d='M2 1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H9.5a1 1 0 0 0-1 1v7.293l2.646-2.647a.5.5 0 0 1 .708.708l-3.5 3.5a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L7.5 9.293V2a2 2 0 0 1 2-2H14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h2.5a.5.5 0 0 1 0 1H2z/>'");
-      // svgEl.append(pathEl);
-      // saveEl.append(svgEl);
       var iconEl = $("<i class='fas fa-save'></i>");              
       saveEl.append(iconEl);
       rowEl.append(saveEl);
-
-    //   console.log(rowEl);
-    //   console.log("setupRows:"+i);
     }
   }
 
@@ -140,12 +129,11 @@ function minuteCounter() {
   }
 
   function saveEvent(hour) {
-    // console.log("saveEvent " + $("#" + hour).val());
-    var text = $("#input"+hour).val();
-    // console.log("text: " + text);
+    // var text = $("#input"+hour).val();
+    var text = $("#"+hour).val();
     // Find index of the hour
     for(var ndx=0; managedHours[ndx][0] != hour; ndx++);
-    managedHours[ndx][1] = text;
+    managedHours[ndx][2] = text;
     localStorage.setItem(eventList, JSON.stringify(managedHours));
    }
 
