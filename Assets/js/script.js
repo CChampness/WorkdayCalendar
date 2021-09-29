@@ -1,17 +1,34 @@
 var managedHours = [[7,"AM",""],[8,"AM",""],[9,"AM",""],[10,"AM",""],[11,"AM",""],
                     [12,"PM",""],[1,"PM",""],[2,"PM",""],[3,"PM",""],[4,"PM",""],[5,"PM",""],[6,"PM",""]];
-// console.log(managedHours);
 const numHours = managedHours.length;
-var dateTime = $('#currentDay');
+var currentTime;
+var currentHour;
+var ampm; // AM or PM of current time
+var afterHours;  // Not in managed hours
 var eventList = "eventList";
+var dateTime = $('#currentDay');
 
-function updateTimeBlocks(currentHour) {
-  // console.log("updateTimeBlocks " + currentHour);
+// This function gets called once at the start of every hour
+function updateTimeBlocks() {
   // Get the position of the current hour in the array
-  for(var pos=0; managedHours[pos][0] != currentHour; pos++);
+  var pos=0;
+ for(;
+    pos < numHours &&
+    (managedHours[pos][0] != currentHour ||
+     managedHours[pos][1] != ampm);
+    pos++);
+
+  // But if currentTime was not in the array of
+  // managed hours, and the current time is "after hours".
+  if (pos == numHours) {
+    afterHours = true;
+  } else {
+    afterHours = false;
+  }
+
   for(var i=0; i<numHours; i++) {
     var hour = managedHours[i][0];
-    if (i < pos) {
+    if (i < pos || afterHours) {
       // Change color for past hours to gray
       $("#" + hour).removeClass("present");
       $("#" + hour).removeClass("future");
@@ -39,49 +56,34 @@ function getStoredEvents() {
    // Display all of the saved events in the schedule
   for(var i=0; i<numHours; i++) {
     $("#"+managedHours[i][0]).val(managedHours[i][2]);
- // console.log(managedHours[i]);
   }
 }
 
 function minuteCounter() {
-  var currentTime;
+  // Initialize current time before doing anything else
   var lastHour = 
-  currentTime = moment().format("MMMM Do, YYYY h:mm A");
-   dateTime.text(currentTime);
+  currentTime = moment().format("MMMM Do, YYYY h:mm");
+  ampm = moment().format("A");
+  dateTime.text(currentTime + " " + ampm);
 
   currentHour = moment().format("hh");
   var lastHour = currentHour;
- 
+   
   // Use the setInterval() function to go off every minute
   var timeInterval = setInterval(function() {
-    currentTime = moment().format("MMMM Do, YYYY h:mm A");
+    currentTime = moment().format("MMMM Do, YYYY h:mm");
+    ampm = moment().format("A");
  
     // Set the time display in the header
-    dateTime.text(currentTime);
+    dateTime.text(currentTime + " " + ampm);
     if (lastHour != currentHour) {
       // The hour has rolled over, so handle the timeblock updates
-      updateTimeBlocks(currentHour);
+      updateTimeBlocks();
       lastHour = currentHour;
     }
     currentHour = moment().format("hh");
-    console.log("lastHour:" + lastHour+", currentHour:" +currentHour);
   }, 60000);  // 1 minute
 }
-
-////////// this is what we want each row to be
-//   <div class="row time-block">
-//   <div class="col col-1 hour">
-//     6PM
-//   </div>
-//   <div id="6" class="col col-8 description future">
-//     <textarea id="input6" rows=4 cols=50></textarea>
-//   </div>
-//   <div onclick="saveEvent(6)" class="col col-1 savebtn">
-//     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-save" viewBox="0 0 16 16">
-//     <path d="M2 1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H9.5a1 1 0 0 0-1 1v7.293l2.646-2.647a.5.5 0 0 1 .708.708l-3.5 3.5a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L7.5 9.293V2a2 2 0 0 1 2-2H14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h2.5a.5.5 0 0 1 0 1H2z"/>
-//     </svg>
-//   </div>
-// </div>
 
   function setupRows(numHours){
     var containerEl = $(".container");
@@ -95,19 +97,9 @@ function minuteCounter() {
       hourEl.text(managedHours[i][0]+managedHours[i][1]);
       rowEl.append(hourEl);
 
-      // var eventEl = $("<div>");
-      // eventEl.attr("id", managedHours[i][0]);
-      // eventEl.addClass("col col-8 description future");
-      // var textEl = $("<textarea>");
-      // textEl.attr("id","input"+managedHours[i][0]);
-      // textEl.attr("rows","4");
-      // textEl.attr("cols","50");
-      // eventEl.append(textEl);
-      // rowEl.append(eventEl);
-
       var eventEl = $("<textarea type='input'>");
       eventEl.attr("id", managedHours[i][0]);
-      eventEl.addClass("col col-8 description future");
+      eventEl.addClass("col col-8 description past");
       eventEl.attr("id", managedHours[i][0]);
       eventEl.attr("rows","4");
       eventEl.attr("cols","50");
@@ -129,7 +121,6 @@ function minuteCounter() {
   }
 
   function saveEvent(hour) {
-    // var text = $("#input"+hour).val();
     var text = $("#"+hour).val();
     // Find index of the hour
     for(var ndx=0; managedHours[ndx][0] != hour; ndx++);
@@ -137,9 +128,8 @@ function minuteCounter() {
     localStorage.setItem(eventList, JSON.stringify(managedHours));
    }
 
-  var currentHour = moment().format("hh");
-  setupRows(numHours);
-  updateTimeBlocks(currentHour);
-  getStoredEvents();
   minuteCounter();
+  setupRows(numHours);
+  updateTimeBlocks();
+  getStoredEvents();
   

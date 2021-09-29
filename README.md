@@ -1,93 +1,46 @@
 # Work Day Calendar
-
+```
 This simple calendar application allows the user to save events for each hour of the day.
 It runs in the browser and features dynamically updated HTML and CSS powered by jQuery.
 The [Moment.js](https://momentjs.com/) library is used to get the date and time.
-
+```
 ## User Story
 
 ```
-AS AN employee with a busy schedule
-I WANT to add important events to a daily planner
-SO THAT I can manage my time effectively
+This mobile-responsive app can be extremely useful for anyone with a busy schedule.
+At the beginning of the day, or the evening before,the user can very easily set up their
+schedule for the day.  As the day goes along, the user can modify the plan as needed,
+and even put in notes on previous hours.
+Then, at the end of the day, the user can look at the schedule to review any
+notes or events that were entered.
+The calendar is cleared by the "Clear schedule" button so that the following day's
+schedule can be entered.
 ```
-
-## Acceptance Criteria
-
+## Features of the Daily Planner
 ```md
-GIVEN I am using a daily planner to create a schedule
+* The current date and time are displayed at the top of the calendar.
 
-WHEN I open the planner
-THEN the current day is displayed at the top of the calendar
+* Timeblocks are displayed for standard business hours.
 
-WHEN I scroll down
-THEN I am presented with timeblocks for standard business hours
+* The timeblocks are color coded: gray is past, red is present, green is future.
 
-WHEN I view the timeblocks for that day
-THEN each timeblock is color coded to indicate whether it is in the past, present, or future
+* To enter an event, the user clicks on the main section of a timeblock according
+to the intended hour.
 
-WHEN I click into a timeblock
-THEN I can enter an event
+* To save an hour's events to local storage, the user clicks on the blue
+button on the right-hand side of the timeblock.
 
-WHEN I click the save button for that timeblock
-THEN the text for that event is saved in local storage
+* Any time the page is refreshed, such as when the device is repowered,
+all of the events are automatically reloaded from persistent local storage.
 
-WHEN I refresh the page
-THEN the saved events persist
+* After hours, the timeblocks are all displayed in gray, but events can be
+entered for the following day.
+
+* The schedule is easily cleared by pressing the "Clear schedule" button.
 ```
 
-The following animation demonstrates the application functionality:
+## Here is a screenshot of the finished app:
+![demo](./DayPlanner.gif)
 
-![A user clicks on slots on the color-coded calendar and edits the events.](./Assets/05-third-party-apis-homework-demo.gif)
-
-
-## Grading Requirements
-
-This homework is graded based on the following criteria: 
-
-### Technical Acceptance Criteria: 40%
-
-* Satisfies all of the above acceptance criteria plus the following:
-
-  * Uses a date utility library to work with date and time
-
-### Deployment: 32%
-
-* Application deployed at live URL
-
-* Application loads with no errors
-
-* Application GitHub URL submitted
-
-* GitHub repo contains application code
-
-### Application Quality: 15%
-
-* Application user experience is intuitive and easy to navigate
-
-* Application user interface style is clean and polished
-
-* Application resembles the mock-up functionality provided in the homework instructions
-
-### Repository Quality: 13%
-
-* Repository has a unique name
-
-* Repository follows best practices for file structure and naming conventions
-
-* Repository follows best practices for class/id naming conventions, indentation, quality comments, etc.
-
-* Repository contains multiple descriptive commit messages
-
-* Repository contains quality README file with description, screenshot, and link to deployed application
-
-## Review
-
-You are required to submit the following for review:
-
-* The URL of the deployed application
-
-* The URL of the GitHub repository, with a unique name and a README describing the project
-
-- - -
-© 2021 Trilogy Education Services, LLC, a 2U, Inc. brand. Confidential and Proprietary. All Rights Reserved.
+## Link to published app on github:
+https://CChampness.github.io/WorkdayCalendar

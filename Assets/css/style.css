@@ -1,25 +1,23 @@
+header {
+  background-color: #3757a9;
+  background-image: linear-gradient(to bottom right, rgba(255, 255, 255, 0.9),rgba(2, 39, 39, 1.0));
+}
+
 body {
   font-family: 'Open Sans', sans-serif;
   font-size: 16px;
   line-height: 1;
 }
 
-/* button {
-  border: 2px solid black;
-} */
-
 textarea {
   position: relative;
   top: 0;
   left: 0;
   margin-top: 1px;
-  /* margin-top: -10px;
-  margin-left: -75px; */
   background: transparent;
   border: none;
   resize: none;
   color: #000000;
-  /* border-left: 1px solid black; */
   padding: 0px;
 }
 
@@ -68,18 +66,17 @@ input {
 
 .past {
   background-color: #d3d3d3;
-  color: white;
+  color: black;
 }
 
 .present {
   background-color: #ff6961;
-  color: white;
-  /* border: 1px solid black; */
+  color: black;
 }
 
 .future {
   background-color: #77dd77;
-  color: white;
+  color: black;
 }
 
 .savebtn {
@@ -88,6 +85,8 @@ input {
   border-bottom-right-radius: 15px;
   background-color: #06aed5;
   color: white;
+  margin-top: 1px;
+  height: 79px;
 }
 
 .savebtn:hover {
